@@ -75,7 +75,7 @@ include "connection.php";
     if(isset($_POST["submit1"])){
         
         $password=hash("sha256",$_POST['password']);
-        $res1=mysqli_query($link,"insert into student_registration values('','$_POST[firstname]','$_POST[lastname]','$_POST[username]','$password','$_POST[email]','$_POST[contact]','$_POST[sem]','$_POST[enrollmentno]')") or die($res1);
+        $res1=mysqli_query($link,"insert into student_registration values('','$_POST[firstname]','$_POST[lastname]','$_POST[username]','$password','$_POST[email]','$_POST[contact]','$_POST[sem]','$_POST[enrollmentno]','no')") or die($res1);
         ?>
             <div class="alert alert-success col-lg-12 col-lg-push-0">
                 Sikeresen regisztráltál!
