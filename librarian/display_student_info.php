@@ -51,7 +51,8 @@
                         echo "<th>"; echo "Sem"; echo "</th>";
                         echo "<th>"; echo "Enrollment"; echo "</th>";
                         echo "<th>"; echo "Státusz"; echo "</th>";
-
+                        echo "<th>"; echo "Elfogadás"; echo "</th>";
+                        echo "<th>"; echo "Elutasítás"; echo "</th>";
                         echo "</tr>";
 
                         while($row=mysqli_fetch_array($res))
@@ -66,6 +67,8 @@
                                 echo "<th>"; echo $row["sem"]; echo "</th>";
                                 echo "<th>"; echo $row["enrollmentno"]; echo "</th>";
                                 echo "<th>"; echo $row["status"]; echo "</th>";
+                                echo "<th>"; ?> <a href="approve.php?id=<?php echo $row["id"]; ?>">Elfogad</a> <?php echo "</th>";
+                                echo "<th>"; ?> <a href="notapprove.php?id=<?php echo $row["id"]; ?>">Elutasít</a> <?php echo "</th>";
         
                                 echo "</tr>";
 

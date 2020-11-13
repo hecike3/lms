@@ -72,7 +72,7 @@ if(isset($_POST["submit1"]))
     {
     $count=0;
     $pwhash=hash("sha256",$_POST['password']);
-      $res=mysqli_query($link,"select * from student_registration where username='$_POST[username]' && password='$pwhash'");
+      $res=mysqli_query($link,"select * from student_registration where username='$_POST[username]' && password='$pwhash' && status='yes' ");
       $count=mysqli_num_rows($res);
 
       if($count==0){
