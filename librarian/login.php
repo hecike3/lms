@@ -85,6 +85,7 @@ if(isset($_POST["submit1"]))
         <?php
       }else
       {
+          $_SESSION["librarian"] = $_POST["email"];
         ?>
 
         <script type="text/javascript">
