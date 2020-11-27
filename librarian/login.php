@@ -1,4 +1,6 @@
 <?php
+ session_start();
+
 include "connection_lib.php";
 ?>
 
@@ -84,8 +86,9 @@ if(isset($_POST["submit1"]))
 
         <?php
       }else
-      {
-          $_SESSION["librarian"] = $_POST["email"];
+      {   $res=mysqli_query($link,"select id from librarian_registration where email='$_POST[email]' && password='$pwhash'");
+          $id= mysqli_fetch_array($res)[0];
+          $_SESSION["librarian"] = $id;
         ?>
 
         <script type="text/javascript">

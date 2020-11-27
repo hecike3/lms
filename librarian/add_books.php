@@ -1,7 +1,9 @@
 <?php
  session_start();
  include "header.php";
- 
+ echo "<pre>";
+ print_r($_SESSION);
+ echo "</pre>";
  ?>
 
 <!-- page content area main -->
