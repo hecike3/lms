@@ -25,7 +25,7 @@
                             <table>
                             <tr>
                                 <td>
-                                    <select class="form-control selectpicker">
+                                    <select name="enr" class="form-control selectpicker">
 
                                     <?php
                                     $res=mysqli_query($link,"select enrollmentno from student_registration");
@@ -51,37 +51,54 @@
                             <?php
                             if(isset($_POST["submit1"]))
                             {
+                                echo $_POST["enr"];
+                                $res5=mysqli_query($link,"select * from student_registration where enrollmentno='$_POST[enr]'");
+                                while($row5=mysqli_fetch_array($res5))
+                                {
+                                    $firstname=$row5["firstname"];
+                                    $lastname=$row5["lastname"];
+                                    $username=$row5["username"];
+                                    $email=$row5["email"];
+                                    $contact=$row5["contact"];
+                                    $sem=$row5["sem"];
+                                    $enrollment=$row5["enrollmentno"];
+                                    $_SESSION["enrollmentno"]=$enrollment;
+                                    $_SESSION["username"]=$username;
+
+                                }
+
+
                                 ?>
 
                                 <table class="table table-bordered">
 
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" name="enrollmentno" placeholder="enrollmentno" disabled>
+                                            <input type="text" class="form-control" name="enrollmentno" value="<?php echo $enrollment?>"  placeholder="enrollmentno" disabled>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" name="studentname" placeholder="studentname" required>
+                                            <input type="text" class="form-control" name="studentname" value="<?php echo $firstname.' '.$lastname?>" placeholder="studentname" required>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" name="studentsem" placeholder="studentsem" required>
+                                            <input type="text" class="form-control" name="studentsem" value="<?php echo $sem?>" placeholder="studentsem" required>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" name="studentcontact" placeholder="studentcontact" required>
+                                            <input type="text" class="form-control" name="studentcontact" value="<?php echo $contact?>" placeholder="studentcontact" required>
                                         </td>
                                     </tr>
                                     
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" name="studentemail" placeholder="studentemail" required>
+                                            <input type="text" class="form-control" name="studentemail" value="<?php echo $email?>" placeholder="studentemail" required>
                                         </td>
                                     </tr>
 
@@ -104,13 +121,13 @@
 
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" name="bookissuedate" placeholder="bookissuedate" required>
+                                            <input type="text" class="form-control" name="bookissuedate" value="<?php echo date("d/M/Y");?>" placeholder="bookissuedate" required>
                                         </td>
                                     </tr>
 
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" name="studentusername" placeholder="studentusername" disabled>
+                                            <input type="text" class="form-control" name="studentusername" placeholder="studentusername" value="<?php echo $username?>" disabled>
                                         </td>
                                     </tr>
                                     
@@ -129,7 +146,22 @@
                             ?>
                                                 
                         </form>
+                            <?php
+                            if(isset($_POST["submit2"]))
+                            {
+                                mysqli_query($link,"insert into issue_books values('','$_SESSION[enrollmentno]','$_POST[studentname]','$_POST[studentsem]','$_POST[studentcontact]','$_POST[studentemail]','$_POST[bookname]','$_POST[bookissuedate]','','$_SESSION[username]')")
 
+                                ?>
+                               <script type="text/javascript">
+                                alert("A könyv kölcsönzésd sikeresen felkerült az adatbázisba!");
+                                window.location.href=window.location.href;
+                                </script>
+
+                                <?php
+                            }
+                            
+                            
+                            ?>
                     </div>
                 </div>
             </div>
