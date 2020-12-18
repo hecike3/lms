@@ -127,7 +127,7 @@
 
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" name="studentusername" placeholder="studentusername" value="<?php echo $username?>" disabled>
+                                            <input type="text" class="form-control" --name="studentusername" placeholder="studentusername" value="<?php echo $username?>" disabled>
                                         </td>
                                     </tr>
                                     

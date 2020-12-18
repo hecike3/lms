@@ -1,7 +1,7 @@
 <?php
  session_start();
  include "header.php";
- 
+ include "connection_lib.php";
  ?>
 
 <!-- page content area main -->
