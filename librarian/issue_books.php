@@ -149,8 +149,8 @@
                             <?php
                             if(isset($_POST["submit2"]))
                             {
-                                mysqli_query($link,"insert into issue_books values('','$_SESSION[enrollmentno]','$_POST[studentname]','$_POST[studentsem]','$_POST[studentcontact]','$_POST[studentemail]','$_POST[bookname]','$_POST[bookissuedate]','','$_SESSION[username]')")
-
+                                mysqli_query($link,"insert into issue_books values('','$_SESSION[enrollmentno]','$_POST[studentname]','$_POST[studentsem]','$_POST[studentcontact]','$_POST[studentemail]','$_POST[bookname]','$_POST[bookissuedate]','','$_SESSION[username]')");
+                                mysqli_query($link,"update add_books set available_qty=available_qty-1 where book_name='$_POST[bookname]'");
                                 ?>
                                <script type="text/javascript">
                                 alert("A könyv kölcsönzésd sikeresen felkerült az adatbázisba!");

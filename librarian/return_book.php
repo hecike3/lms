@@ -68,7 +68,7 @@
                             echo "<th>"; echo "student email"; echo "</th>";
                             echo "<th>"; echo "book name"; echo "</th>";
                             echo "<th>"; echo "book issue date"; echo "</th>";
-
+                            echo "<th>"; echo "Return book"; echo "</th>";
                             echo "</tr>";
                             while($row=mysqli_fetch_array($res))
                             {
@@ -80,6 +80,7 @@
                                     echo "<td>"; echo $row["student_email"]; echo "</td>";
                                     echo "<td>"; echo $row["books_name"]; echo "</td>";
                                     echo "<td>"; echo $row["books_issue_date"]; echo "</td>";
+                                    echo "<td>"; ?> <a href="return.php?id=<?php echo $row["id"]; ?>"> Return book  <?php echo "</td>";
                                 echo "</tr>";
                             }
                             echo "</table>";
