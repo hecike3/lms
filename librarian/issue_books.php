@@ -149,6 +149,22 @@
                             <?php
                             if(isset($_POST["submit2"]))
                             {
+                                $qty=0;
+                                $res= mysqli_query($link,"SELECT * from add_books WHERE book_name='$_POST[bookname]'");
+                                while($row=mysqli_fetch_array($res)){
+                                    $qty=$row["available_qty"];
+                                }
+
+                                if($qty==0){
+                                    ?> 
+                                        <div class="alert alert-danger col-lg-6 col-lg-push-3">
+                                            <strong>Ez a könyv sajnos nem elérhető! :( </strong>
+                                        </div>
+                                    <?php
+                                }
+                                else{
+
+                                
                                 mysqli_query($link,"insert into issue_books values('','$_SESSION[enrollmentno]','$_POST[studentname]','$_POST[studentsem]','$_POST[studentcontact]','$_POST[studentemail]','$_POST[bookname]','$_POST[bookissuedate]','','$_SESSION[username]')");
                                 mysqli_query($link,"update add_books set available_qty=available_qty-1 where book_name='$_POST[bookname]'");
                                 ?>
@@ -158,6 +174,7 @@
                                 </script>
 
                                 <?php
+                                }
                             }
                             
                             

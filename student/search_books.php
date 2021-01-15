@@ -12,19 +12,10 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Search Books</h3>
+                            <h3>Könyvek keresése</h3>
                         </div>
 
-                        <div class="title_right">
-                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search for...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">Go!</button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                      
                     </div>
 
                     <div class="clearfix"></div>
@@ -43,7 +34,42 @@
 
 
                             <?php
-                            $i=0;
+
+                            if(isset($_POST["submit1"])){
+                                $i=0;
+                            $res=mysqli_query($link,"select * from add_books where book_name like ('%$_POST[t1]%')");
+                            echo "<table class='table table-bordered'>";
+                            echo "<tr>";
+                            if($res->num_rows === 0)
+                            {
+                                echo 'Sajnos nincs ilyen könyv amit keresel :( ';
+                            }
+                            while($row=mysqli_fetch_array($res))
+                            {
+                                $i=$i+1;
+                                echo "<td>";
+                                ?> <img src="../librarian/<?php echo $row["cover"];?>" height="100" width="100" > <?php
+                                echo "<br>";
+                                echo "<b>".$row["book_name"]."</b>";
+                                echo "<br>";
+                                echo "<b>". "Elérhető :".$row["available_qty"]."</b>";
+                                echo "</td>";
+
+                                if($i==2){
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    $i=0;
+
+                                }
+                            }
+                            echo "</table>";
+                            ?> 
+                            <a href="/search_books.php"> Vissza az összes könyvhöz (még ne kattints rá nem működik :( )</a>
+                            
+                            <?php
+
+                            }else{
+                                $i=0;
                             $res=mysqli_query($link,"select * from add_books");
                             echo "<table class='table table-bordered'>";
                             echo "<tr>";
@@ -66,6 +92,10 @@
                                 }
                             }
                             echo "</table>";
+                            }
+
+
+                            
                             ?>
 
                             </div>
