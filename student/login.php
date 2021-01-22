@@ -24,7 +24,7 @@ include "connection.php";
 <br>
 
 <div class="col-lg-12 text-center ">
-    <h1 style="font-family:Lucida Console">Spooktober Könyvtár </h1>
+    <h1 style="font-family:Lucida Console">Dr.Code Könyvtár </h1>
 </div>
 
 <br>
@@ -84,6 +84,7 @@ if(isset($_POST["submit1"]))
                 </div>
 
         <?php
+        
       }else
       {
         $_SESSION["username"]=$_POST["username"];

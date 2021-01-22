@@ -63,6 +63,8 @@
                         <h3>Menü</h3>
                         <ul class="nav side-menu">
                             <li><a href="dashboard.php"><i class="fa fa-home"></i> Dashboard </a> </li>
+
+                            <li><a href="add_books.php"><i class="fa fa-book"></i> Könyvek felvétele </a></li>
                             
                             <li><a href="display_books.php"><i class="fa fa-book"></i> Könyvek megjelenítése </a></li>
                             

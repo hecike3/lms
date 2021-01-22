@@ -23,7 +23,7 @@ include "connection.php";
 <br>
 
 <div class="col-lg-12 text-center ">
-    <h1 style="font-family:Lucida Console">Spooktober Könyvtár</h1>
+    <h1 style="font-family:Lucida Console">Dr.Code Könyvtár</h1>
 </div>
 
 
@@ -38,29 +38,29 @@ include "connection.php";
                 <h2>Diák regisztrációs űrlap</h2><br>
 
                 <div>
-                    <input type="text" class="form-control" placeholder="FirstName" name="firstname" required="" />
+                    <input type="text" class="form-control" placeholder="Keresztnév" name="firstname" required="" />
                 </div>
                 <div>
-                    <input type="text" class="form-control" placeholder="LastName" name="lastname" required="" />
+                    <input type="text" class="form-control" placeholder="Vezetéknév" name="lastname" required="" />
                 </div>
 
                 <div>
-                    <input type="text" class="form-control" placeholder="Username" name="username" required="" />
+                    <input type="text" class="form-control" placeholder="Felhasználónév" name="username" required="" />
                 </div>
                 <div>
-                    <input type="password" class="form-control" placeholder="Password" name="password" required="" />
+                    <input type="password" class="form-control" placeholder="Jelszó" name="password" required="" />
                 </div>
                 <div>
-                    <input type="email" class="form-control" placeholder="email" name="email" required="" />
+                    <input type="email" class="form-control" placeholder="E-mail" name="email" required="" />
                 </div>
                 <div>
-                    <input type="text" class="form-control" placeholder="contact" name="contact" required="" />
+                    <input type="text" class="form-control" placeholder="Telefonszám" name="contact" required="" />
                 </div>
                 <div>
-                    <input type="text" class="form-control" placeholder="SEM" name="sem" required="" />
+                    <input type="text" class="form-control" placeholder="Azonosító" name="sem" required="" />
                 </div>
                 <div>
-                    <input type="text" class="form-control" placeholder="Enrollment No" name="enrollmentno"
+                    <input type="text" class="form-control" placeholder="Félév azonosító" name="enrollmentno"
                         required="" />
                 </div>
                 <div class="col-lg-12  col-lg-push-3">
@@ -78,7 +78,7 @@ include "connection.php";
         $res1=mysqli_query($link,"insert into student_registration values('','$_POST[firstname]','$_POST[lastname]','$_POST[username]','$password','$_POST[email]','$_POST[contact]','$_POST[sem]','$_POST[enrollmentno]','no')") or die($res1);
         ?>
             <div class="alert alert-success col-lg-12 col-lg-push-0">
-                Sikeresen regisztráltál!
+                Sikeresen regisztráltál! <a href="login.php">Vissza a bejelentkezésre</a>
             </div>
         <?php
     }

@@ -47,25 +47,16 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <h3>Főmenü</h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
 
-                                </li>
-                                <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                                <li><a href="main.php"><i class="fa fa-home"></i> Főoldal</a></li>
 
-                                </li>
-                                <li><a><i class="fa fa-desktop"></i> UI Elements <span
-                                            class="fa fa-chevron-down"></span></a>
+                                <li><a href="search_books.php"><i class="fa fa-home"></i> Könyvek keresése</a></li>
 
-                                </li>
-                                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-
-                                </li>
-                                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span
-                                            class="fa fa-chevron-down"></span></a>
-
-                                </li>
+                                <li><a href="my_issued_books.php"><i class="fa fa-home"></i> Kikölcsönzött könyvek</a></li>
+                                
+                                
 
                             </ul>
                         </div>

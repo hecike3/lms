@@ -98,7 +98,7 @@ if(isset($_POST["submit1"])){
 
     ?>
     <script type="text/javascript">
-    alert("yo");
+    alert("Sikerült a könyv felvétele!");
     </script>
 
 <?php

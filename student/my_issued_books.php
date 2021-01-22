@@ -34,19 +34,16 @@
                                    
                                    <table class="table table-bordered">
                                    <th>
-                                        Student Enrollment No
+                                   Félév azonosító
                                    </th>
                                    <th>
-                                        Issued Books Date
+                                        Kikölcsönzés dátuma
                                    </th>
                                    <th>
-                                        Books issue expire date
+                                        Kölcsönzés lejárata
                                    </th>
                                    
                                    <?php
-                                    echo "<pre>";
-                                    print_r($_SESSION);
-                                    echo "</pre>";
 
                                    $res=mysqli_query($link,"select * from issue_books where student_username='$_SESSION[username]'");
                                    while($row = mysqli_fetch_array($res)){
