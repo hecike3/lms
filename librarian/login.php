@@ -89,7 +89,7 @@ if(isset($_POST["submit1"]))
       }else
       {   $res=mysqli_query($link,"select id from librarian_registration where email='$_POST[email]' && password='$pwhash'");
           $id= mysqli_fetch_array($res)[0];
-          $_SESSION["librarian"] = $id;
+          $_SESSION["librarian"] = $_POST["email"];
         ?>
 
         <script type="text/javascript">

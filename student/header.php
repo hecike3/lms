@@ -1,3 +1,13 @@
+<?php
+session_start();
+include "connection.php";
+$tot=0;
+$res=mysqli_query($link,"select * from messages where dusername='$_SESSION[username]' && read1='n' ");
+$tot=mysqli_num_rows($res);
+echo $tot;
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
