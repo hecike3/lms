@@ -1,6 +1,8 @@
 <?php
 session_start();
 include "connection.php";
+
+print_r($_SESSION);
 ?>
 
 

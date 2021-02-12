@@ -4,7 +4,7 @@ include "connection.php";
 $tot=0;
 $res=mysqli_query($link,"select * from messages where dusername='$_SESSION[username]' && read1='n' ");
 $tot=mysqli_num_rows($res);
-echo $tot;
+print_r($_SESSION);
 ?>
 
 
@@ -44,9 +44,9 @@ echo $tot;
                             <img src="images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
-                            <span>Welcome,</span>
+                            <span>Üdvözlet,</span>
 
-                            <h2>John Doe</h2>
+                            <h2><?= $_SESSION['username'];?></h2>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -89,19 +89,19 @@ echo $tot;
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                     aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">John Doe
+                                    <img src="images/img.jpg" alt=""><?= $_SESSION['username'];?>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Kijelentkezés</a></li>
                                 </ul>
                             </li>
 
                             <li role="presentation" class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                                <a href="" class="dropdown-toggle info-number" onclick="location.href='message_from_librarian.php';" data-toggle="dropdown"
                                     aria-expanded="false">
                                     <i class="fa fa-envelope-o"></i>
-                                    <span class="badge bg-green">6</span>
+                                    <span class="badge bg-green" ><?= $tot; ?></span>
                                 </a>
 
                             </li>
