@@ -40,7 +40,9 @@
                                     
                                     
                                 echo "<tr>";
-                                echo "<td>"; echo $row[""]; echo "</td>";
+                                echo "<td>"; echo $fullname; echo "</td>";
+                                echo "<td>"; echo $row["title"]; echo "</td>";
+                                echo "<td>"; echo $row["msg"]; echo "</td>";
                                 echo "</tr>";
                             }
 

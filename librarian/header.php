@@ -72,6 +72,8 @@
 
                             <li><a href="issue_books.php"><i class="fa fa-address-book"></i> Kölcsönzött könyvek</a></li>
 
+                            <li><a href="send_notification_student.php"><i class="fa fa-address-book"></i> Üzenet küldése a diáknak</a></li>
+
                             <li><a href="logout.php"><i class="fa fa-sign-out"></i> Kijelentkezés </a></li>
 
                             
