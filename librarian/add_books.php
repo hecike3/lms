@@ -1,8 +1,8 @@
 <?php
- session_start();
+ 
  include "header.php";
  ?>
-
+<title>Könyvek felvétele | LMS </title>
 <!-- page content area main -->
 <div class="right_col" role="main">
 

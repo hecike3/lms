@@ -1,5 +1,17 @@
 <?php
- include "connection_lib.php"
+ include "connection_lib.php";
+ session_start();
+ if(!isset($_SESSION["librarian"]))
+ {
+    ?>
+        <script type="text/javascript">
+            alert("Naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            window.location="login.php"
+        
+        </script>
+    <?php
+ }
+
 
 ?>
 
@@ -13,7 +25,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Plain Page | LMS </title>
+    
 
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -103,7 +115,8 @@
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                <li><a href="edit_profile.php"><i class="fa fa-user pull-right"></i> Profil szerkesztése</a></li>
+                                <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Kijeletnkezés</a></li>
                             </ul>
                         </li>
 

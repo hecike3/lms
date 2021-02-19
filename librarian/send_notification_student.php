@@ -1,9 +1,9 @@
 <?php
- session_start();
  include "header.php";
  include "connection_lib.php";
  ?>
 
+<title>Üzenet küldés | LMS </title>
 <!-- page content area main -->
 <div class="right_col" role="main">
     <div class="">

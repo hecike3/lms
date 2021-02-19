@@ -4,7 +4,7 @@
  include "connection_lib.php";
  
  ?>
-
+<title>Diákok megjelnítése | LMS </title>
 <!-- page content area main -->
 <div class="right_col" role="main">
     <div class="">

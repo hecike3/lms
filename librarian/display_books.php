@@ -1,9 +1,9 @@
 <?php
-  session_start();
+
  include "header.php";
  
  ?>
-
+<title>Könyvek megjelenítése  | LMS </title>
 <!-- page content area main -->
 <div class="right_col" role="main">
 
@@ -39,6 +39,7 @@
                                 echo "<th>"; echo "Könyv ára"; echo "</th>";
                                 echo "<th>"; echo "Összesen"; echo "</th>";
                                 echo "<th>"; echo "Elérhető"; echo "</th>";
+                                echo "<th>"; echo "Törlés"; echo "</th>";
                                 echo "</tr>";
                             while($row = mysqli_fetch_array($res)){
                                 echo "<tr>";
@@ -50,6 +51,7 @@
                                 echo "<td>"; echo $row["price"]; echo "</td>";
                                 echo "<td>"; echo $row["qty"]; echo "</td>";
                                 echo "<td>"; echo $row["available_qty"]; echo "</td>";
+                                echo "<td>"; ?> <button id="<?=$row["id"]?>" class="btn btn-danger">Törlés</button> <?php echo "</td>";
                                 echo "</tr>";
 
                             }
@@ -67,9 +69,10 @@
                         echo "<th>"; echo "Könyv ára"; echo "</th>";
                         echo "<th>"; echo "Összesen"; echo "</th>";
                         echo "<th>"; echo "Elérhető"; echo "</th>";
+                        echo "<th>"; echo "Törlés"; echo "</th>";
                         echo "</tr>";
                     while($row = mysqli_fetch_array($res)){
-                        echo "<tr>";
+                        echo "<tr class='fade-away'>";
                         echo "<td>"; echo $row["book_name"]; echo "</td>";
                         echo "<td>"; ?> <img src="<?php echo $row["cover"]; ?>" height="100" width="100"> <?php  echo "</td>";
                         echo "<td>"; echo $row["author_name"]; echo "</td>";
@@ -78,6 +81,7 @@
                         echo "<td>"; echo $row["price"]; echo "</td>";
                         echo "<td>"; echo $row["qty"]; echo "</td>";
                         echo "<td>"; echo $row["available_qty"]; echo "</td>";
+                        echo "<td>"; ?> <button id="<?=$row["id"]?>" class="btn btn-danger">Törlés</button> <?php echo "</td>";
                         echo "</tr>";
 
                     }
@@ -93,9 +97,35 @@
 <!-- /page content -->
 
 
-
 <?php
  
  include "footer.php";
  
  ?>           
+
+
+ 
+<script type="text/javascript" >
+        $(function() {
+
+            $(".btn-danger").click(function() {
+                var del_id = $(this).attr("id");
+                var info = 'id=' + del_id;
+                if (confirm("Biztos szeretnéd törölni?")) {
+                    $.ajax({
+                        type : "POST",
+                        url : "delete_books.php",
+                        data : info,
+                        success : function() {
+
+                          console.log("yo");
+                        }
+                    });
+                    $(this).parents(".fade-away").animate("fast").animate({
+                        opacity : "hide"
+                    }, "slow");
+                }
+                return false;
+            });
+        });
+ </script>
