@@ -1,41 +1,89 @@
 <?php
 include "assets/header.php";
+include "connection.php";
 ?>
 
+
+<!-- Ez ittni a Jumpbotron-->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="jumbotron">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+              <h1 class="display-4">Dr.Code <b>Online</b> könyvtára!</h1>
+              <p class="lead">Ha esetleg szeretnél könyveket kölcsönözni <b> ONLINE </b> akkor a legjobb helyen jársz :3 </p>
+              <hr class="my-4">
+              <p>Ha nem találod a könyvek között amit keresel kérlek keress fel minket.</p>
+              <a class="btn btn-primary btn-lg" href="#" role="button">Kapcsolat</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+<!-- Könyv lista -->
 <div class="container">
-    <div class="row no-padding">
+  <div class="row">
 
-    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<?php
+$res= mysqli_query($link,"SELECT * FROM add_books ORDER BY id ASC LIMIT 4");
+while($row=mysqli_fetch_array($res)){
+  ?>
+        <div class="col-lg-6">
+
+          <div class="card mb-3" style="max-width: 540px;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="librarian/<?php echo $row["cover"];?>" class="img-thumbnail" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title"> <?php echo $row["book_name"];?> </h5>
+                  <p class="card-text">Író : <?php echo $row["author_name"];?></p>
+                  <p class="card-text"><small class="text-muted">Kiadó : <?php echo $row["publicator_name"];?></small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+       </div>
+
+  <?php
+}
+?>
+
+</div>
+</div>
+
+<!-- Rólunk snipet  -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+
+        <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Rólunk</h1>
+    <p class="lead">Mi egy nagyon csodálatos könyvtár vagyunk ám. Ha többet szeretnél megtudni a történelmünkről illetve a könyvtár életéről akkor kattints az alábbi gombra 😘</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Rólunk</a>
   </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="assets/img/1.jpg" class="d-block w-100 h-50" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/2.jpg" class="d-block w-100 h-50" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/3.jpg" class="d-block w-100 h-50" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually">Előző</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually">Következő</span>
-  </button>
 </div>
 
 
 
     </div>
+  </div>
 </div>
+
+
+
 
 
 

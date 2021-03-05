@@ -1,8 +1,7 @@
-.no-padding{
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-.container-fluid{
-    padding-left: 0 !important;
-    padding-right: 0 !important
+.jumbotron{
+    background: url("../img/2.jpg") no-repeat center center; 
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
 }
