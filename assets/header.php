@@ -31,7 +31,9 @@
         <li class="nav-item">
           <a class="nav-link" href="kapcsolat.php">Kapcsolat</a>
         </li>
-        <button class="btn btn-outline-success" onclick="window.location.href='student/login.php'">Bejelentkezés <i class="fa fa-user" aria-hidden="true"></i> </button>
+        <li class="nav-item">
+          <button class="btn btn-outline-success mr-2" onclick="window.location.href='student/login.php'">Bejelentkezés <i class="fa fa-user" aria-hidden="true"></i> </button>   
+        </li>
       
     </div>
   </div>
