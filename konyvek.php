@@ -39,11 +39,6 @@ include "connection.php";
     //$result = mysqli_query($link,$total_pages);
     $page_count=mysqli_query($link,"SELECT (CEIL(COUNT(id)/$no_of_records_per_page)) AS page_count FROM add_books")->fetch_assoc()["page_count"];
 
-    print_r($page_count);
-    
-
-
-
 
 ?>
 
@@ -64,81 +59,101 @@ include "connection.php";
                     <!-- Section: Condition -->
                     <section class="mb-4">
 
-                       
 
-                        <div class="form-check pl-0 mb-3">
-                            <input type="checkbox" class="form-check-input filled-in" id="new">
-                            <label class="form-check-label small text-uppercase card-link-secondary"
-                                for="new">New</label>
-                        </div>
-                        <div class="form-check pl-0 mb-3">
-                            <input type="checkbox" class="form-check-input filled-in" id="used">
-                            <label class="form-check-label small text-uppercase card-link-secondary"
-                                for="used">Used</label>
-                        </div>
-                        <div class="form-check pl-0 mb-3">
-                            <input type="checkbox" class="form-check-input filled-in" id="collectible">
-                            <label class="form-check-label small text-uppercase card-link-secondary"
-                                for="collectible">Collectible</label>
-                        </div>
-                        <div class="form-check pl-0 mb-3 pb-1">
-                            <input type="checkbox" class="form-check-input filled-in" id="renewed">
-                            <label class="form-check-label small text-uppercase card-link-secondary"
-                                for="renewed">Renewed</label>
-                        </div>
+                        <div class="card">
+                            <article class="card-group-item">
+                                <header class="card-header">
+                                    <h6 class="title">Ár</h6>
+                                </header>
+                                <div class="filter-content">
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                                <label>Minimum</label>
+                                                <input type="number" class="form-control" id="ar1"
+                                                    placeholder="1 000 Ft"  min="1" onchange="filterButtonEnable()">
+                                            </div>
+                                            <div class="form-group col-md-6 text-right">
+                                                <label>Maximum</label>
+                                                <input type="number" class="form-control" min="1" id="ar2" placeholder="10 000 Ft" onchange="filterButtonEnable()">
+                                            </div>
+                                            <button id="filter" class="btn">Szűrés</button>
+                                        </div>
+                                    </div>
 
-                    </section>
-                    <!-- Section: Condition -->
-
-                    <!-- Section: Price -->
-                    <section class="mb-4">
-
-                        <h6 class="font-weight-bold mb-3">Price</h6>
-                        <form>
-                            <div class="d-flex align-items-center mt-4 pb-1">
-                                <div class="md-form md-outline my-0">
-                                    <input id="from" type="text" class="form-control mb-0">
-                                    <label for="form">$ Min</label>
                                 </div>
-                                <p class="px-2 mb-0 text-muted"> - </p>
-                                <div class="md-form md-outline my-0">
-                                    <input id="to" type="text" class="form-control mb-0">
-                                    <label for="to">$ Max</label>
+                            </article>
+                            <article class="card-group-item">
+                                <header class="card-header">
+                                    <h6 class="title">Kategória </h6>
+                                </header>
+                                <div class="filter-content">
+                                    <div class="card-body">
+                                        <div class="custom-control custom-checkbox">
+                                            <span class="float-right badge badge-light round">
+                                                <?php 
+                                    $res=mysqli_query($link,"SELECT COUNT(category) FROM add_books  WHERE category='irodalom'")->fetch_array();
+                                    echo $res[0];
+                                    ?>
+                                            </span>
+                                            <a href="?category=irodalom">Irodalom</a>
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox">
+                                            <span class="float-right badge badge-light round">
+                                                <?php 
+                                    $res=mysqli_query($link,"SELECT COUNT(category) FROM add_books  WHERE category='tudomany'")->fetch_array();
+                                    echo $res[0];
+                                    ?>
+                                            </span>
+                                            <a href="?category=tudomany">Tudomány</a>
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox">
+                                            <span class="float-right badge badge-light round">
+                                                <?php 
+                                    $res=mysqli_query($link,"SELECT COUNT(category) FROM add_books  WHERE category='scifi'")->fetch_array();
+                                    echo $res[0];
+                                    ?>
+                                            </span>
+                                            <a href="?category=scifi">Sci-fi</a>
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox">
+                                            <span class="float-right badge badge-light round">
+                                                <?php 
+                                    $res=mysqli_query($link,"SELECT COUNT(category) FROM add_books  WHERE category='humor'")->fetch_array();
+                                    echo $res[0];
+                                    ?>
+                                            </span>
+                                            <a href="?category=humor">Humor</a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-
-                    </section>
-                    <!-- Section: Price -->
-
-                    <!-- Section: Price version 2 -->
-                    <section class="mb-4">
-
-                        <h6 class="font-weight-bold mb-3">Price</h6>
-
-                        <div class="slider-price d-flex align-items-center my-4">
-                            <span class="font-weight-normal small text-muted mr-2">$0</span>
-                            <form class="multi-range-field w-100 mb-1">
-                                <input id="multi" class="multi-range" type="range" />
-                            </form>
-                            <span class="font-weight-normal small text-muted ml-2">$100</span>
+                            </article>
                         </div>
 
+
                     </section>
-                    <!-- Section: Price version 2 -->
-
-
-
-                </section>
-                <!-- Section: Filters -->
-
-            </section>
-            <!-- Section: Sidebar -->
+                    <!-- Section: Sidebar -->
         </div>
         <div class="col-lg-9">
             <?php
-                $sql = "SELECT * FROM add_books ORDER BY id ASC LIMIT $offset, $no_of_records_per_page";
-                $res= mysqli_query($link,$sql);
+
+                if(isset($_GET['category'])){
+                    $catagery = $_GET['category'];
+                    print_r ($catagery);
+                    $catagery_filter = "SELECT * FROM add_books WHERE category='$catagery'";
+                    $res= mysqli_query($link,$catagery_filter);
+                }
+                else{
+                    $sql = "SELECT * FROM add_books ORDER BY id ASC LIMIT $offset, $no_of_records_per_page";
+                    $res= mysqli_query($link,$sql);
+                }
+                
+                
+                
+                
                 while($row=mysqli_fetch_array($res)){
                 ?>
 
@@ -196,6 +211,33 @@ include "connection.php";
 
 
 
+
+<script type="text/javascript">
+
+var ar1 = document.getElementById("ar1");
+var ar2 = document.getElementById("ar2");
+var filter = document.getElementById("filter");
+
+filter.style="pointer-events: none;";
+filter.classList.add('btn-outline-danger');
+
+function filterButtonEnable(){
+
+    if(ar1.value > 0 || ar2.value > 0){
+        filter.style = "pointer-events: auto;";
+        filter.classList.remove('btn-outline-danger');
+        filter.classList.add('btn-outline-success');
+
+    }
+    else{
+        filter.style="cursor : wait; pointer-events: none;"
+        filter.classList.add('btn-outline-danger');
+    }
+
+
+}
+
+</script>
 
 
 <?php
