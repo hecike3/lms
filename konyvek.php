@@ -1,6 +1,39 @@
 <?php
 include "assets/header.php";
 include "connection.php";
+
+
+$all_kiado=$link->query("SELECT  publicator_name FROM `add_books`  GROUP BY publicator_name");
+$all_iro=$link->query("SELECT  author_name FROM `add_books` GROUP BY author_name");
+$all_kategoria=$link->query("SELECT  category FROM `add_books`  GROUP BY category");
+
+// Filter query
+$sql= "SELECT distinct id FROM `add_books` ";
+if(isset($_GET['publicator_name']) && $_GET['publicator_name']!="") :
+    $kiado = $_GET['publicator_name'];
+    $sql.=" AND publicator_name IN ('".implode("','",$kiado)."')";
+endif;
+
+if(isset($_GET['author_name']) && $_GET['author_name']!="") :
+    $iro = $_GET['author_name'];
+    $sql.=" AND author_name IN ('".implode("','",$iro)."')";
+endif;
+
+if(isset($_GET['category']) && $_GET['category']!="") :
+    $kategoria = $_GET['category'];
+    $sql.=" AND category IN (".implode(',',$kategoria).")";
+endif;
+
+
+$minden_konyv=$link->query($sql);
+$content_per_page = 3;
+$rowcount=mysqli_num_rows($minden_konyv);
+$total_data = ceil($rowcount / $content_per_page);
+function data_clean($str)
+{
+    return str_replace(' ','_',$str);
+}
+
 ?>
 <!-- Ez ittni a Jumpbotron-->
 
@@ -23,6 +56,9 @@ include "connection.php";
 
 <!-- Könyvek -->
 
+
+<!-- Pagenation -->
+
 <?php
 
     if(isset($_GET['page'])){
@@ -43,9 +79,11 @@ include "connection.php";
 ?>
 
 
+<!-- ///Pagenation -->
 
 
 <div class="container">
+<form method="get" id="search_form">
     <div class="row">
         <div class="col-lg-3">
             <!-- Section: Sidebar -->
@@ -63,72 +101,76 @@ include "connection.php";
                         <div class="card">
                             <article class="card-group-item">
                                 <header class="card-header">
-                                    <h6 class="title">Ár</h6>
+                                    <h6 class="title">Író</h6>
                                 </header>
                                 <div class="filter-content">
                                     <div class="card-body">
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <label>Minimum</label>
-                                                <input type="number" class="form-control" id="ar1"
-                                                    placeholder="1 000 Ft"  min="1" onchange="filterButtonEnable()">
-                                            </div>
-                                            <div class="form-group col-md-6 text-right">
-                                                <label>Maximum</label>
-                                                <input type="number" class="form-control" min="1" id="ar2" placeholder="10 000 Ft" onchange="filterButtonEnable()">
-                                            </div>
-                                            <button id="filter" class="btn">Szűrés</button>
-                                        </div>
+                                    <ul class="list-group">
+                                            <?php foreach ($all_iro as $key => $new_iro) :
+                                                if(isset($_GET['iro'])) :
+                                                    if(in_array(data_clean($new_iro['author_name']),$_GET['author_name'])) : 
+                                                        $check='checked="checked"';
+                                                    else : $check="";
+                                                    endif;
+                                                endif;
+                                            ?>
+                                                <li class="list-group-item">
+                                                    <div class="checkbox"><label> <input type="checkbox" class="szokoz" value="<?=data_clean($new_iro['author_name']);?>" <?=@$check?> name="author_name[]" > <?=ucfirst($new_iro['author_name']); ?></label></div>
+                                                </li>
+                                            <?php endforeach; ?>
+                                            </ul>
                                     </div>
 
                                 </div>
                             </article>
+
+                            <article class="card-group-item">
+                                <header class="card-header">
+                                    <h6 class="title">Kiadó</h6>
+                                </header>
+                                <div class="filter-content">
+                                    <div class="card-body">
+                                                <ul class="list-group">
+                                            <?php foreach ($all_kiado as $key => $new_kiado) :
+                                                if(isset($_GET['kiado'])) :
+                                                    if(in_array(data_clean($new_kiado['publicator_name']),$_GET['publicator_name'])) : 
+                                                        $check='checked="checked"';
+                                                    else : $check="";
+                                                    endif;
+                                                endif;
+                                            ?>
+                                                <li class="list-group-item">
+                                                    <div class="checkbox"><label><input type="checkbox" class="szokoz" value="<?=data_clean($new_kiado['publicator_name']);?>" <?=@$check?> name="publicator_name[]" > <?=ucfirst($new_kiado['publicator_name']); ?></label></div>
+                                                </li>
+                                            <?php endforeach; ?>
+                                            </ul>
+                                    </div>
+
+                                </div>
+                            </article>
+
+
                             <article class="card-group-item">
                                 <header class="card-header">
                                     <h6 class="title">Kategória </h6>
                                 </header>
                                 <div class="filter-content">
                                     <div class="card-body">
-                                        <div class="custom-control custom-checkbox">
-                                            <span class="float-right badge badge-light round">
-                                                <?php 
-                                    $res=mysqli_query($link,"SELECT COUNT(category) FROM add_books  WHERE category='irodalom'")->fetch_array();
-                                    echo $res[0];
-                                    ?>
-                                            </span>
-                                            <a href="?category=irodalom">Irodalom</a>
-                                        </div>
-
-                                        <div class="custom-control custom-checkbox">
-                                            <span class="float-right badge badge-light round">
-                                                <?php 
-                                    $res=mysqli_query($link,"SELECT COUNT(category) FROM add_books  WHERE category='tudomany'")->fetch_array();
-                                    echo $res[0];
-                                    ?>
-                                            </span>
-                                            <a href="?category=tudomany">Tudomány</a>
-                                        </div>
-
-                                        <div class="custom-control custom-checkbox">
-                                            <span class="float-right badge badge-light round">
-                                                <?php 
-                                    $res=mysqli_query($link,"SELECT COUNT(category) FROM add_books  WHERE category='scifi'")->fetch_array();
-                                    echo $res[0];
-                                    ?>
-                                            </span>
-                                            <a href="?category=scifi">Sci-fi</a>
-                                        </div>
-
-                                        <div class="custom-control custom-checkbox">
-                                            <span class="float-right badge badge-light round">
-                                                <?php 
-                                    $res=mysqli_query($link,"SELECT COUNT(category) FROM add_books  WHERE category='humor'")->fetch_array();
-                                    echo $res[0];
-                                    ?>
-                                            </span>
-                                            <a href="?category=humor">Humor</a>
-                                        </div>
-                                    </div>
+                                    <ul class="list-group">
+                                            <?php foreach ($all_kategoria as $key => $new_kategoria) :
+                                                if(isset($_GET['kategoria'])) :
+                                                    if(in_array(data_clean($new_kategoria['category']),$_GET['category'])) : 
+                                                        $check='checked="checked"';
+                                                    else : $check="";
+                                                    endif;
+                                                endif;
+                                            ?>
+                                                <li class="list-group-item">
+                                                    <div class="checkbox"><label><input type="checkbox" class="szokoz" value="<?=data_clean($new_kategoria['category']);?>" <?=@$check?> name="category[]" > <?=ucfirst($new_kategoria['category']); ?></label></div>
+                                                </li>
+                                            <?php endforeach; ?>
+                                            </ul>
+                                    
                                 </div>
                             </article>
                         </div>
@@ -137,55 +179,14 @@ include "connection.php";
                     </section>
                     <!-- Section: Sidebar -->
         </div>
-        <div class="col-lg-9">
-            <?php
-
-                if(isset($_GET['category'])){
-                    $catagery = $_GET['category'];
-                    print_r ($catagery);
-                    $catagery_filter = "SELECT * FROM add_books WHERE category='$catagery'";
-                    $res= mysqli_query($link,$catagery_filter);
-                }
-                else{
-                    $sql = "SELECT * FROM add_books ORDER BY id ASC LIMIT $offset, $no_of_records_per_page";
-                    $res= mysqli_query($link,$sql);
-                }
-                
-                
-                
-                
-                while($row=mysqli_fetch_array($res)){
-                ?>
-
-
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="librarian/<?php echo $row["cover"];?>" class="img-thumbnail" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <?php echo $row["book_name"];?>
-                            </h5>
-                            <p class="card-text">Író :
-                                <?php echo $row["author_name"];?>
-                            </p>
-                            <p class="card-text"><small class="text-muted">Kiadó :
-                                    <?php echo $row["publicator_name"];?>
-                                </small></p>
-                        </div>
-                    </div>
-                </div>
+        <section class="col-lg-9 col-md-8">
+            <div class="row">
+                <div id="results"></div>
             </div>
-
-
-            <?php
-                }
-                ?>
-        </div>
+        </section>
 
     </div>
+</form>
 </div>
 
 
@@ -209,33 +210,54 @@ include "connection.php";
     </div>
 </div>
 
-
+<script src="assets/js/script.js"></script>
 
 
 <script type="text/javascript">
 
-var ar1 = document.getElementById("ar1");
-var ar2 = document.getElementById("ar2");
-var filter = document.getElementById("filter");
-
-filter.style="pointer-events: none;";
-filter.classList.add('btn-outline-danger');
-
-function filterButtonEnable(){
-
-    if(ar1.value > 0 || ar2.value > 0){
-        filter.style = "pointer-events: auto;";
-        filter.classList.remove('btn-outline-danger');
-        filter.classList.add('btn-outline-success');
-
+$(document).ready(function() {
+    var total_record = 0;
+    var iro=check_box_values('author_name'); //brand
+    var kiado=check_box_values('publicator_name'); //material
+    var kategoria=check_box_values('category'); //size
+    var total_groups = <?php echo $total_data; ?>;
+    $('#results').load("autoload.php?group_no="+total_record+"&brand="+brand+"&material="+material+"&size="+size,  function() {
+        total_record++;
+    });
+    $(window).scroll(function() {       
+        if($(window).scrollTop() + $(window).height() == $(document).height())  
+          
+        {    
+            if(total_record <= total_groups)
+            {
+                loading = true;
+                $('.loader').show();
+                $.get("autoload.php?group_no="+total_record+"&brand="+brand+"&material="+material+"&size="+size,
+                function(data){ 
+                if (data != "") {                               
+                    $("#results").append(data);
+                    $('.loader').hide();                  
+                    total_record++;
+                }
+                });     
+            }
+                // total_record ++;
+        }
+    });
+    function check_box_values(check_box_class){
+        var values = new Array();
+            $("."+check_box_class+":checked").each(function() {
+               values.push($(this).val());
+            });
+        return values;
     }
-    else{
-        filter.style="cursor : wait; pointer-events: none;"
-        filter.classList.add('btn-outline-danger');
-    }
+    $('.sort_rang').change(function(){
+        $("#search_form").submit();
+        return false;
+    });
+});
 
 
-}
 
 </script>
 
