@@ -10,3 +10,12 @@
 .szokoz{
     margin-right:500px;
 }
+
+.spacer{
+    margin-top: 56px;
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

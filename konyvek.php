@@ -221,7 +221,7 @@ $(document).ready(function() {
     var kiado=check_box_values('publicator_name'); //material
     var kategoria=check_box_values('category'); //size
     var total_groups = <?php echo $total_data; ?>;
-    $('#results').load("autoload.php?group_no="+total_record+"&brand="+brand+"&material="+material+"&size="+size,  function() {
+    $('#results').load("autoload.php?author_name="+iro+"&publicator_name="+kategoria+"&category="+kategoria,  function() {
         total_record++;
     });
     $(window).scroll(function() {       
@@ -232,7 +232,7 @@ $(document).ready(function() {
             {
                 loading = true;
                 $('.loader').show();
-                $.get("autoload.php?group_no="+total_record+"&brand="+brand+"&material="+material+"&size="+size,
+                $.get("autoload.php?group_no="+total_record+"&author_name="+iro+"&publicator_name="+kiado+"&category="+kategoria,
                 function(data){ 
                 if (data != "") {                               
                     $("#results").append(data);

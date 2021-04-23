@@ -50,6 +50,7 @@ while($row=mysqli_fetch_array($res)){
                   <h5 class="card-title"> <?php echo $row["book_name"];?> </h5>
                   <p class="card-text">Író : <?php echo $row["author_name"];?></p>
                   <p class="card-text"><small class="text-muted">Kiadó : <?php echo $row["publicator_name"];?></small></p>
+                  <a class="btn btn-success" href="konyv.php?id=<?php echo $row["id"];?>">Tovább olvasom</a>
                 </div>
               </div>
             </div>
