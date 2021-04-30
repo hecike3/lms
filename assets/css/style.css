@@ -1,12 +1,3 @@
-.jumbotron{
-    background: url("../img/2.jpg") no-repeat center center; 
-    -webkit-background-size: 100% 100%;
-    -moz-background-size: 100% 100%;
-    -o-background-size: 100% 100%;
-    background-size: 100% 100%;
-}
-
-
 .szokoz{
     margin-right:500px;
 }
@@ -18,4 +9,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.hero{
+    background-color: #222;
+    color: #fff;
+    font-weight: 800;
+    font-size: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Khula", sans-serif;
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
 }

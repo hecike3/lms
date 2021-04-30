@@ -7,5 +7,6 @@
 
 
 </body>
-
+<script src="assets/js/anime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/letterizejs@2.0.1/lib/letterize.min.js" type="module"></script>
 </html>
