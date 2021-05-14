@@ -66,6 +66,8 @@ print_r($_SESSION);
 
                                 <li><a href="my_issued_books.php"><i class="fa fa-home"></i> Kikölcsönzött könyvek</a></li>
                                 
+                                <li><a href="profile.php"><i class="fa fa-user"></i> Profil szerkesztése</a></li>
+                                
                                 
 
                             </ul>
