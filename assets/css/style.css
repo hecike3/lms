@@ -20,8 +20,37 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: "Khula", sans-serif;
-    height: 100vh;
+    height: 60vh;
     box-sizing: border-box;
     margin: 0;
+}
+
+
+.value{
+    font-size: 64px;
+    color:green;
+    font-weight: 800;
+
+}
+
+.counter{
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    text-align: center;
+    
+}
+.unit{
+    padding-left: 10px;
+    font-size: 32px;
+    color:green;
+    font-weight: 500;
+
+}
+
+.description {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 100;
+    font-style: italic;
 }
