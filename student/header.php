@@ -5,6 +5,8 @@ $tot=0;
 $res=mysqli_query($link,"select * from messages where dusername='$_SESSION[username]' && read1='n' ");
 $tot=mysqli_num_rows($res);
 print_r($_SESSION);
+$pic=mysqli_query($link,"select profilepic from student_registration where username='$_SESSION[username]'")->fetch_array();
+print_r($pic);
 ?>
 
 
@@ -41,7 +43,7 @@ print_r($_SESSION);
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src="<?php echo $pic[0];?>" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Üdvözlet,</span>
@@ -91,7 +93,7 @@ print_r($_SESSION);
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                     aria-expanded="false">
-                                    <img src="images/img.jpg" alt=""><?= $_SESSION['username'];?>
+                                    <img src="<?php echo $pic[0];?>" alt=""><?= $_SESSION['username'];?>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
