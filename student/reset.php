@@ -1,8 +1,8 @@
 <?php
- session_start();
+session_start();
+include "connection.php";
 
-
-include "connection_lib.php";
+print_r($_SESSION);
 ?>
 
 
@@ -15,7 +15,7 @@ include "connection_lib.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bejelentkezés | Könyvtáros </title>
+    <title>Jelszó változtatás | Tanuló </title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@ include "connection_lib.php";
 <br>
 
 <div class="col-lg-12 text-center ">
-    <h1 style="font-family:Lucida Console">Spooktober Könyvtár </h1>
+    <h1 style="font-family:Lucida Console">Dr.Code Könyvtár </h1>
 </div>
 
 <br>
@@ -38,18 +38,18 @@ include "connection_lib.php";
 
     <section class="login_content">
         <form name="form1" action="" method="post">
-            <h1>Könyvtáros belépés</h1>
+            <h1>Jelszó változtatás</h1>
 
             <div>
-                <input type="email" name="email" class="form-control" placeholder="E-mail cím" required=""/>
+                <input type="text" name="answer" class="form-control" placeholder="Válasz" required=""/>
             </div>
             <div>
-                <input type="password" name="password" class="form-control" placeholder="Jelszó" required=""/>
+                <input type="password" name="password" class="form-control" placeholder=" Új jelszó" required=""/>
             </div>
             <div>
 
-                <input class="btn btn-default submit" type="submit" name="submit1" value="Bejelentkezés">
-                <a class="reset_pass" href="#">Elvesztetted a jelszavad?</a>
+                <input class="btn btn-default submit" type="submit" name="submit1" value="Küldés">
+                
             </div>
 
             <div class="clearfix"></div>
@@ -75,25 +75,28 @@ if(isset($_POST["submit1"]))
     {
     $count=0;
     $pwhash=hash("sha256",$_POST['password']);
-      $res=mysqli_query($link,"select * from librarian_registration where email='$_POST[email]' && password='$pwhash'");
+      $res=mysqli_query($link,"select * from student_registration where username='$_SESSION[username]' && securityanswer='$_POST[answer]'");
       $count=mysqli_num_rows($res);
 
       if($count==0){
             ?>
 
                 <div class="alert alert-danger col-lg-6 col-lg-push-3">
-                    <strong style="color:white">Hibás</strong> a felhasználónév vagy a jelszó
+                    <strong style="color:white">Hibás</strong> a biztonsági kérdésre adott válaszod! 
                 </div>
 
         <?php
+        
       }else
-      {   $res=mysqli_query($link,"select id from librarian_registration where email='$_POST[email]' && password='$pwhash'");
-          $id= mysqli_fetch_array($res)[0];
-          $_SESSION["librarian"] = $_POST["email"];
+      {
+        $sql = "UPDATE student_registration SET password='$pwhash' WHERE username='$_SESSION[username]'";
+        print_r($sql);
+        mysqli_query($link,$sql);
         ?>
 
         <script type="text/javascript">
-        window.location="dashboard.php";
+        alert("Sikeresen megváltoztattad a jelszavad");
+        window.location="login.php";
         </script>
 
         <?php

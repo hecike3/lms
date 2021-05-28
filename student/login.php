@@ -49,7 +49,7 @@ print_r($_SESSION);
             <div>
 
                 <input class="btn btn-default submit" type="submit" name="submit1" value="Bejelentkezés">
-                <a class="reset_pass" href="#">Elvesztetted a jelszavad?</a>
+                <a class="reset_pass" href="password-reset.php">Elvesztetted a jelszavad?</a>
             </div>
 
             <div class="clearfix"></div>

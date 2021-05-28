@@ -1,8 +1,8 @@
 <?php
- session_start();
+session_start();
+include "connection.php";
 
-
-include "connection_lib.php";
+print_r($_SESSION);
 ?>
 
 
@@ -15,7 +15,7 @@ include "connection_lib.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bejelentkezés | Könyvtáros </title>
+    <title>Elfelejtett jelszó | Tanuló </title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@ include "connection_lib.php";
 <br>
 
 <div class="col-lg-12 text-center ">
-    <h1 style="font-family:Lucida Console">Spooktober Könyvtár </h1>
+    <h1 style="font-family:Lucida Console">Dr.Code Könyvtár </h1>
 </div>
 
 <br>
@@ -38,18 +38,13 @@ include "connection_lib.php";
 
     <section class="login_content">
         <form name="form1" action="" method="post">
-            <h1>Könyvtáros belépés</h1>
+            <h1>Elfelejtett jelszó</h1>
 
             <div>
-                <input type="email" name="email" class="form-control" placeholder="E-mail cím" required=""/>
+                <input type="text" name="username" class="form-control" placeholder="Felhasználónév" required=""/>
             </div>
             <div>
-                <input type="password" name="password" class="form-control" placeholder="Jelszó" required=""/>
-            </div>
-            <div>
-
-                <input class="btn btn-default submit" type="submit" name="submit1" value="Bejelentkezés">
-                <a class="reset_pass" href="#">Elvesztetted a jelszavad?</a>
+                <input class="btn btn-default submit" type="submit" name="submit1" value="Tovább">
             </div>
 
             <div class="clearfix"></div>
@@ -74,26 +69,24 @@ include "connection_lib.php";
 if(isset($_POST["submit1"]))
     {
     $count=0;
-    $pwhash=hash("sha256",$_POST['password']);
-      $res=mysqli_query($link,"select * from librarian_registration where email='$_POST[email]' && password='$pwhash'");
+      $res=mysqli_query($link,"select * from student_registration where username='$_POST[username]'");
       $count=mysqli_num_rows($res);
 
       if($count==0){
             ?>
 
                 <div class="alert alert-danger col-lg-6 col-lg-push-3">
-                    <strong style="color:white">Hibás</strong> a felhasználónév vagy a jelszó
+                    A felhasználónév <strong style="color:white">nem található </strong> az adatbázisban!
                 </div>
 
         <?php
+        
       }else
-      {   $res=mysqli_query($link,"select id from librarian_registration where email='$_POST[email]' && password='$pwhash'");
-          $id= mysqli_fetch_array($res)[0];
-          $_SESSION["librarian"] = $_POST["email"];
+      {
+        $_SESSION["username"]=$_POST["username"];
         ?>
-
         <script type="text/javascript">
-        window.location="dashboard.php";
+        window.location="reset.php";
         </script>
 
         <?php

@@ -35,7 +35,7 @@ include "connection.php";
   <div class="row">
 
 <?php
-$res= mysqli_query($link,"SELECT * FROM add_books ORDER BY id ASC LIMIT 4");
+$res= mysqli_query($link,"SELECT * FROM add_books ORDER BY id DESC LIMIT 4");
 while($row=mysqli_fetch_array($res)){
   ?>
         <div class="col-lg-6">

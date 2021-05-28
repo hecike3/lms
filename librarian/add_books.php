@@ -71,6 +71,26 @@
 
                             <tr>
                                 <td>
+                                    <select name="category" class="form-control">
+                                        <option value="uncategorized">Nincs megadva kategória</option>
+                                        <option value="scifi">Sci-Fi</option>
+                                        <option value="tudomany">Tudomány</option>
+                                        <option value="humor">Humor</option>
+                                        <option value="irodalom">Irodalom</option>
+                                        <option value="krimi">Krimi</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label class="form-control"> Leírás : </label>
+                                    <textarea class="form-control" name="description" required=""> </textarea>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
                                     <input type="submit" class="form-control" class="btn btn-default submit" name="submit1" value="Könyv felvétele">
                                 </td>
                             </tr>
@@ -94,7 +114,7 @@ if(isset($_POST["submit1"])){
 
     move_uploaded_file($_FILES["cover"] ["tmp_name"],$dst);
 
-    mysqli_query($link,"insert into add_books values('','$_POST[bookname]','$dst1','$_POST[author]','$_POST[publicator]','$_POST[purchase]','$_POST[price]','$_POST[qty]','$_POST[avaliable_qty]','$_SESSION[librarian]')");
+    mysqli_query($link,"insert into add_books values('','$_POST[bookname]','$dst1','$_POST[author]','$_POST[publicator]','$_POST[purchase]','$_POST[price]','$_POST[qty]','$_POST[avaliable_qty]','$_SESSION[librarian]','$_POST[category]','$_POST[description]')");
 
     ?>
     <script type="text/javascript">

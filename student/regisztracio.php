@@ -63,6 +63,18 @@ include "connection.php";
                     <input type="text" class="form-control" placeholder="Félév azonosító" name="enrollmentno"
                         required="" />
                 </div>
+                <div>
+                    <select name="securityquestion" class="form-control">
+                        <option value="1">Mi volt az első jószágod neve?</option>
+                        <option value="2">Mi volt?</option>
+                        <option value="3">Mi volt előbb a tyűk vagy a tojás?</option>
+                        <option value="4">Ki a kedvenc énekesed?</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="text" class="form-control" placeholder="Biztonásgi kérdés válasz:" name="securityanswer"
+                        required="" />
+                </div>
                 <div class="col-lg-12  col-lg-push-3">
                     <input class="btn btn-default submit " type="submit" name="submit1" value="Regisztráció">
                 </div>
@@ -75,7 +87,7 @@ include "connection.php";
     if(isset($_POST["submit1"])){
         
         $password=hash("sha256",$_POST['password']);
-        $res1=mysqli_query($link,"insert into student_registration values('','$_POST[firstname]','$_POST[lastname]','$_POST[username]','$password','$_POST[email]','$_POST[contact]','$_POST[sem]','$_POST[enrollmentno]','no')") or die($res1);
+        $res1=mysqli_query($link,"insert into student_registration values('','$_POST[firstname]','$_POST[lastname]','$_POST[username]','$password','$_POST[email]','$_POST[contact]','$_POST[sem]','$_POST[enrollmentno]','no','profilepic/defaultpic.jpg','$_POST[securityquestion]','$_POST[securityanswer]')") or die($res1);
         ?>
             <div class="alert alert-success col-lg-12 col-lg-push-0">
                 Sikeresen regisztráltál! <a href="login.php">Vissza a bejelentkezésre</a>
